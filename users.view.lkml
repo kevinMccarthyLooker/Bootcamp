@@ -73,6 +73,7 @@ view: users {
   dimension: country {
     type: string
     sql: ${TABLE}.country ;;
+    map_layer_name: countries
   }
 
   dimension: zip {
@@ -90,11 +91,11 @@ view: users {
     sql: ${TABLE}.longitude ;;
   }
 
-#   dimension: location {
-#     type: location
-#     sql_latitude: ${latitude} ;;
-#     sql_longitude: ${longitude} ;;
-#   }
+  dimension: location {
+    type: location
+    sql_latitude: ${latitude} ;;
+    sql_longitude: ${longitude} ;;
+  }
 
 ######################
 ##### Other Info #####
