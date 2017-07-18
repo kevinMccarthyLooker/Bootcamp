@@ -14,9 +14,8 @@ explore: inventory_items {
     relationship: many_to_one
   }
 }
-
-
 explore: order_items {
+
 #To Do: Add distribution_centers join to this explore
 description: "Information about orders including user information"
 join: users {
@@ -32,3 +31,17 @@ join: inventory_items {
 }
 
 }
+
+################################
+#### Explore Filters example ###
+# #   sql_always_where: ${inventory_items.product_brand}='Calvin Klein' ;;
+#
+# #   always_filter: {
+# conditionally_filter: {
+#   unless: [inventory_items.product_name]
+#   filters: {
+#     field: inventory_items.product_brand
+#     value: "Calvin Klein"
+#   }
+# }
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^#

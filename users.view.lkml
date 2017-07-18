@@ -66,6 +66,7 @@ view: users {
 
   dimension: state {
     type: string
+    map_layer_name: us_states
     sql: ${TABLE}.state ;;
   }
 
@@ -88,6 +89,12 @@ view: users {
     type: number
     sql: ${TABLE}.longitude ;;
   }
+
+#   dimension: location {
+#     type: location
+#     sql_latitude: ${latitude} ;;
+#     sql_longitude: ${longitude} ;;
+#   }
 
 ######################
 ##### Other Info #####
