@@ -1,8 +1,10 @@
 view: order_items {
   sql_table_name: public.order_items ;;
 
+
+
   dimension: id {
-    hidden:  yes
+#     hidden:  yes
     primary_key: yes
     type: number
     sql: ${TABLE}.id ;;
@@ -30,7 +32,7 @@ view: order_items {
   dimension_group: created {
     group_label: "Date Created"
     type: time
-    timeframes: [raw,date,month,month_name,year]
+    timeframes: [raw,date,week,month,month_name,year]
     sql: ${TABLE}.created_at ;;
   }
 
@@ -56,6 +58,12 @@ view: order_items {
     drill_fields: [detail*]
   }
 
+  measure: total_sale_price {
+    type: sum
+    value_format_name: usd
+    sql: ${sale_price} ;;
+  }
+
 
   # ----- Sets of fields for drilling ------
   set: detail {
@@ -64,21 +72,4 @@ view: order_items {
 
 # Exercise: Create 'complete' yesNo field off of status and then total_complete_sale_price
 
-########################
-##### For Explorer #####
-  measure: total_sale_price {
-    type: sum
-    value_format_name: usd
-    sql: ${sale_price} ;;
-  }
-
-  dimension: days_as_customer {
-    type: number
-    sql: datediff('days',${users.created_date},current_date) ;;
-  }
-
-#for explorers: ID hidden
-
-
-#^^^^^^^^^^^^^^^^^^^^^^#
 }

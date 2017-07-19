@@ -114,19 +114,6 @@ view: users {
     drill_fields: [id, first_name, last_name, events.count, order_items.count]
   }
 
-########################
-##### For Explorer #####
-  dimension: age_tier {
-    type: tier
-    tiers: [20,30,40,50,60]
-    style: integer
-    sql: ${age} ;;
-  }
-
-#for explorers: ID hidden
-
-#^^^^^^^^^^^^^^^^^^^^^^#
-
 
 }
 # To Do: Add group_labels

@@ -7,11 +7,6 @@ include: "*.dashboard" # include all the dashboards
 explore: inventory_items {
   description: "Basic product and inventory information"
 
-  access_filter: {
-    field: inventory_items.product_brand
-    user_attribute: brand
-  }
-
   join: distribution_centers {
     type: left_outer
     sql_on: ${inventory_items.product_distribution_center_id} = ${distribution_centers.id} ;;

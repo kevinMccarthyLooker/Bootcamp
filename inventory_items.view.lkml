@@ -2,7 +2,7 @@ view: inventory_items {
   sql_table_name: public.inventory_items ;;
 
   dimension: id {
-    hidden: yes
+#     hidden: yes
     primary_key: yes
     type: number
     sql: ${TABLE}.id ;;
@@ -30,6 +30,13 @@ view: inventory_items {
     type: string
     sql: ${TABLE}.product_brand ;;
   }
+
+  dimension: my_brand_or_others {
+    type: string
+    sql: case when '{{ _user_attributes["brand"] }}' = ${product_brand} then ${product_brand} else 'Other' END ;;
+  }
+
+
 
   dimension: product_category {
     label: "Category"
@@ -70,5 +77,3 @@ view: inventory_items {
     drill_fields: [id, product_name, products.id, products.name, order_items.count]
   }
 }
-
-#for explorers: ID hidden

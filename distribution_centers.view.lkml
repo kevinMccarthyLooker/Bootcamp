@@ -2,7 +2,7 @@ view: distribution_centers {
   sql_table_name: public.distribution_centers ;;
 
   dimension: id {
-    hidden: yes
+#     hidden: yes
     primary_key: yes
     type: number
     sql: ${TABLE}.id ;;
@@ -28,5 +28,3 @@ view: distribution_centers {
     drill_fields: [id, name, products.count]
   }
 }
-
-#for explorers: ID hidden
