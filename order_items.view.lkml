@@ -72,4 +72,5 @@ view: order_items {
 
 # Exercise: Create 'complete' yesNo field off of status and then total_complete_sale_price
 
+
 }
