@@ -30,6 +30,30 @@ view: users {
     sql: ${TABLE}.email ;;
   }
 
+  dimension: age_tier{
+    type: tier
+    tiers: [20, 30, 40, 50, 60]
+    style:  integer
+    sql:${age} ;;
+  }
+
+  dimension: city_state{
+    type: string
+    sql: ${city} || ', ' || ${state} ;;
+  }
+
+  dimension: something {
+    type: string
+    sql: concat(${city}, ${state}, 'concat') ;;
+  }
+
+
+
+  dimension: is_from_usa{
+    type: yesno
+    sql: ${country}='USA';;
+  }
+
 ############################
 ##### Demographic Info #####
 #To do: Create years_as_consumer
@@ -48,10 +72,10 @@ view: users {
 ##############################
 ##### Created Dates Info #####
 #To do: Add Quarter Created and Day Of Year Created
-  dimension_group: created {
-    type: time
-    timeframes: [raw,date,month,year]
-    sql: ${TABLE}.created_at ;;
+  dimension_group: created{
+    type:  time
+    timeframes: [raw, date, month, day_of_year, quarter, time_of_day, year]
+    sql:${TABLE}.created_at ;;
   }
 
 #########################
@@ -112,6 +136,14 @@ view: users {
   measure: count {
     type: count
     drill_fields: [id, first_name, last_name, events.count, order_items.count]
+  }
+
+  measure: usa_count {
+    type: count
+    filters: {
+       field: is_from_usa
+       value: "Yes"
+    }
   }
 
 
