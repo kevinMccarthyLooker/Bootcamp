@@ -14,6 +14,8 @@ explore: inventory_items {
   }
 }
 
+##something
+
 explore: order_items {
   #To Do: Add distribution_centers join to this explore
   description: "Information about orders including user information"
