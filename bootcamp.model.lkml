@@ -13,6 +13,7 @@ explore: inventory_items {
     relationship: many_to_one
   }
 }
+#test
 
 explore: order_items {
   #To Do: Add distribution_centers join to this explore
