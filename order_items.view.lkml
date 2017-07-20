@@ -55,6 +55,16 @@ view: order_items {
     type: sum
     value_format_name: usd
     sql: ${sale_price} ;;
+    html:
+    {% if status._value == 'Complete' %}
+    <span style ="color: violet; background-color: lightblue; font-size:200%">{{ value }}</span>
+    {% elsif status._value == 'Cancelled' %}
+    <span style  ="color: darkgreen">{{ value }}</span>
+    {% elsif status._value == 'Returned' %}
+    <span style ="color: darkblue">{{ value }}</span>
+    {% else %}
+    <span style  ="color: darkorange">{{ value }}</span>
+    {% endif %} ;;
   }
 
   measure: count {
