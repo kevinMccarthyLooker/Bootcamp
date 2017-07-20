@@ -43,6 +43,18 @@ view: order_items {
   dimension: status {
     type: string
     sql: ${TABLE}.status ;;
+    html:
+    {% if status._value == 'Complete' %}
+    <span style ="color: violet; background-color: lightblue; font-size:200%">{{ value }}</span>
+    {% elsif status._value == 'Cancelled' %}
+    <span style  ="color: darkgreen; background-color: darkred; font-size:150%">{{ value }}</span>
+    {% elsif status._value == 'Returned' %}
+    <span style ="color: darkblue">{{ value }}</span>
+    {% elsif status._value == 'Shipped' %}
+    <span style  ="color: darkorange">{{ value }}</span>
+    {% else %}
+    <span style= "color: black" >{{value}}</span>
+    {% endif %} ;;
   }
 
   dimension: sale_price {
@@ -59,7 +71,7 @@ view: order_items {
     {% if status._value == 'Complete' %}
     <span style ="color: violet; background-color: lightblue; font-size:200%">{{ value }}</span>
     {% elsif status._value == 'Cancelled' %}
-    <span style  ="color: darkgreen">{{ value }}</span>
+    <span style  ="color: darkgreen; background-color: darkred; font-size:150%">{{ value }}</span>
     {% elsif status._value == 'Returned' %}
     <span style ="color: darkblue">{{ value }}</span>
     {% else %}
