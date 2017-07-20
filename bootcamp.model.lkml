@@ -15,6 +15,13 @@ explore: inventory_items {
 }
 
 explore: order_items {
+  #To Do: Add distribution_centers join to this explore
+  #sql_always_where: ${inventory_items.product_brand}= 'Plus' ;;
+  #sql_always_having: ${users.count}>100 ;;
+  #access_filter: {
+ #   field: inventory_items.product_brand
+ #   user_attribute: brand
+ # }
   description: "Information about orders including user information"
 
   join: users {

@@ -31,6 +31,15 @@ view: order_items {
     type: time
     timeframes: [raw,date,week,month,month_name,year]
     sql: ${TABLE}.created_at ;;
+    html:
+    {% if value > '2017-01-01' %}
+    <span style ="color: darkgreen">{{ value }}</span>
+    {% elsif value == '>2016-01-01' %}
+    <span style  ="color: darkred">{{ value }}</span>
+    {% else %}
+    <span style  ="color: goldenrod">{{ value }}</span>
+    {% endif %} ;;
+
   }
 
   dimension_group: returned {
@@ -43,18 +52,31 @@ view: order_items {
   dimension: status {
     type: string
     sql: ${TABLE}.status ;;
+     html:
+ {% if value == 'Complete' %}
+ <span style ="color: darkgreen">{{ value }} <img src="https://i.ytimg.com/vi/YxIiPLVR6NA/default.jpg"</span>
+ {% elsif value == 'Cancelled' %}
+ <span style  ="color: darkred">{{ value }}</span>
+ {% elsif value == 'Returned' %}
+ <span style ="color: darkred">{{ value }}</span>
+ {% else %}
+ <span style  ="color: goldenrod">{{ value }}</span>
+ {% endif %} ;;
+
+
   }
 
-  dimension: sale_price {
+   dimension: sale_price {
     type: number
     sql: ${TABLE}.sale_price ;;
     value_format_name: usd
-  }
+ }
 
   measure: total_sale_price {
     type: sum
     value_format_name: usd
     sql: ${sale_price} ;;
+
   }
 
   measure: count {
@@ -69,17 +91,18 @@ view: order_items {
 
 }
 
+
 #Example Liquid formatting for Status
-# html:
-# {% if value == 'Complete' %}
-# <span style ="color: darkgreen">{{ value }}</span>
-# {% elsif value == 'Cancelled' %}
-# <span style  ="color: darkred">{{ value }}</span>
-# {% elsif value == 'Returned' %}
-# <span style ="color: darkred">{{ value }}</span>
-# {% else %}
-# <span style  ="color: goldenrod">{{ value }}</span>
-# {% endif %} ;;
+ #html:
+ #{% if value == 'Complete' %}
+ #<span style ="color: darkgreen">{{ value }}</span>
+ #{% elsif value == 'Cancelled' %}
+ #<span style  ="color: darkred">{{ value }}</span>
+ #{% elsif value == 'Returned' %}
+ #<span style ="color: darkred">{{ value }}</span>
+ #{% else %}
+ #<span style  ="color: goldenrod">{{ value }}</span>
+ #{% endif %} ;;
 
 
 #Example Link parameters for Status with liquid

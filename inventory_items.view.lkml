@@ -31,6 +31,29 @@ view: inventory_items {
     sql: ${TABLE}.product_brand ;;
   }
 
+  filter: brand_select {
+    type: string
+    suggest_dimension: product_brand
+  }
+
+  filter: category_select {
+    type: string
+    suggest_dimension: product_category
+  }
+
+  # dimension: product_category_competitor {
+  #   type: string
+  #   sql: CASE
+  #   when {% condition brand_select %} ${product_brand} {% endcondition %} and {% condition category_select %} ${product_category} {% endcondition %}
+  #   THEN ${product_brand} ||' '|| ${product_category}
+  #   when {% condition brand_select %} ${product_brand} {% endcondition %}
+  #   then 'Rest of Brand'
+  #   when {% condition category_select %} ${product_category} {% endcondition %}
+  #   then 'Rest Of Categories' {% endcondition %}
+  #   else 'All Other Brands'
+  #   END;;
+  # }
+
   dimension: product_category {
     label: "Category"
     type: string
