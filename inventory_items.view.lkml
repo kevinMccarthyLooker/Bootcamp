@@ -31,6 +31,23 @@ view: inventory_items {
     sql: ${TABLE}.product_brand ;;
   }
 
+  dimension: brand_comparitor {
+    sql: CASE
+    WHEN {% condition brandfilter %} ${TABLE}.product_brand {%endcondition%}
+    THEN ${TABLE}.product_brand
+    ELSE 'Other'
+    END ;;
+  }
+
+  filter: brandfilter {
+    label: "Brand Filter"
+    type: string
+    suggest_dimension: product_brand
+  }
+
+
+
+
   dimension: product_category {
     label: "Category"
     type: string
