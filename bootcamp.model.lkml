@@ -15,8 +15,8 @@ explore: inventory_items {
 }
 
 explore: order_items {
-  #To Do: Add distribution_centers join to this explore
   description: "Information about orders including user information"
+
   join: users {
     type: left_outer
     sql_on: ${order_items.user_id} = ${users.id} ;;
@@ -29,5 +29,28 @@ explore: order_items {
     relationship: many_to_one
   }
 
-
 }
+
+
+##### explore filter type examples ####
+#   sql_always_where: ${order_items.status} = 'Complete' ;; ## Note: For measures, use sql_always_having
+#
+#   always_filter: {
+#     filters: {
+#       field: order_items.status
+#       value: "Complete"
+#     }
+#   }
+#
+#   conditionally_filter: {
+#     filters: {
+#       field: order_items.status
+#       value: "Completed"
+#     }
+#     unless: [order_items.order_id,inventory_items.id]
+#   }
+#
+#   access_filter: {
+#     field: inventory_items.product_brand
+#     user_attribute: brand
+#   }

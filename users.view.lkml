@@ -6,7 +6,7 @@ view: users {
 
   dimension: id {
     primary_key: yes
-    hidden: yes
+#     hidden: yes
     type: number
     sql: ${TABLE}.id ;;
   }
@@ -32,12 +32,16 @@ view: users {
 
 ############################
 ##### Demographic Info #####
-#To do: Create years_as_consumer
-#To do: Create age tiers
 
   dimension: age {
     type: number
     sql: ${TABLE}.age ;;
+  }
+
+  dimension: age_tier {
+    type: tier
+    tiers: [20,30,40,50,60]
+    sql: ${age} ;;
   }
 
   dimension: gender {
@@ -47,7 +51,7 @@ view: users {
 
 ##############################
 ##### Created Dates Info #####
-#To do: Add Quarter Created and Day Of Year Created
+
   dimension_group: created {
     type: time
     timeframes: [raw,date,month,year]
@@ -56,8 +60,6 @@ view: users {
 
 #########################
 ##### Loctaion Info #####
-#To do: Add is_domestic yesNo
-#To do: Enable mapping: Add Location type field or state map_layer_name
 
   dimension: city {
     type: string
@@ -114,8 +116,8 @@ view: users {
     drill_fields: [id, first_name, last_name, events.count, order_items.count]
   }
 
+  set: detail {
+    fields: [id,first_name,last_name,email,age,gender,created_date,city,state,country,zip,latitude,longitude,traffic_source]
+  }
 
 }
-# To Do: Add group_labels
-#Exercise: Add city, state field
-#Exercise: Add age tier with groupings 0-17, 18-64, 65 and above
